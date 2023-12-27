@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb
+  namespace: roboshop
   labels:
     project: roboshop
     app: mongodb
@@ -31,14 +32,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-port
+  name: mongodb
 spec:
   selector:
     project: roboshop
     app: mongodb
     tier: db
   ports:
-    - name: mongodb-port
+    - name: mongodb
       protocol: TCP
       port: 27017
       targetPort: 27017
