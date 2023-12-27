@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    project: roboshop
+    app: mongodb
+    tier: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      app: mongodb
+      tier: db
+template:
+  metadata:
+    labels:
+      project: roboshop
+      app: mongodb
+      tier: db
+  spec:
+    containers:
+      - name: mongo
+        image: rajakuma/mongodb:1.0.0
+        ports:
+        - containerPort: 80
