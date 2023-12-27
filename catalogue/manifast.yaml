@@ -1,25 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catalouge-deployment
-  labels::
-    app: catalouge
+  name: catalogue-deployment
+  labels:
+    app: catalogue
     project: roboshop
     tier: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: catalouge
+      app: catalogue
       project: roboshop
       tier: app
   template:
     metadata:
       labels:
-        app: catalouge
+        app: catalogue
         project: roboshop
         tier: app
     spec:
       containers:
-        - name: catalouge
-          image: rajakuma/catalouge:1.0.0
+        - name: catalogue
+          image: rajakuma/catalogue:1.0.0
+          envFrom:
+            configMapRef:
+              name: catalogue
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue-service
+spec:
+  selector::
+    app: catalogue
+    project: roboshop
+    tier: app
+  ports:
+    - name: catalogue-port
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue-configMap
+data:
+    MONGO: "true"
+    MONGO_URL: "mongodb://mongodb:27017/catalogue"
