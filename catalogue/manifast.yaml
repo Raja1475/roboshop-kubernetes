@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalouge-deployment
+  labels::
+    app: catalouge
+    project: roboshop
+    tier: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalouge
+      project: roboshop
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: catalouge
+        project: roboshop
+        tier: app
+    spec:
+      containers:
+        - name: catalouge
+          image: rajakuma/catalouge:1.0.0
