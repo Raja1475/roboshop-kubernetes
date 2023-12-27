@@ -24,8 +24,8 @@ spec:
         - name: catalogue
           image: rajakuma/catalogue:1.0.0
           envFrom:
-            configMapRef:
-              name: catalogue
+            - configMapRef:
+                name: catalogue
 ---
 apiVersion: v1
 kind: Service
