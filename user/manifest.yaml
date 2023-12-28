@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-deployment
+  name: user
   namespace: roboshop
   labels:
     app: user
@@ -31,7 +31,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: user
   namespace: roboshop
 spec:
   selector:
@@ -39,7 +39,7 @@ spec:
       tier: app
       project: roboshop
   ports:
-    - name: user-port
+    - name: user
       protocol: TCP
       port: 8080
       targetPort: 8080
@@ -47,7 +47,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: user-configmap
+  name: user
   namespace: roboshop
 data:
   MONGO: "true" # keep true in double quotes
