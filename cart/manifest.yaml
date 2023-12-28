@@ -41,7 +41,7 @@ spec:
   ports:
   - name: mongodb-port
     protocol: TCP
-    port: 8080 # this port belongs to service
+    port: 8080 # this port belongs to services
     targetPort: 8080 # this port belongs to container
 ---
 apiVersion: v1
