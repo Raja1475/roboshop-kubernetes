@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: cart
   namespace: roboshop
-  labels:
+  labels: # these labels belong to deployment
     app: cart
     tier: app
     project: roboshop
 spec:
   replicas: 1
   selector:
-    matchLabels:
+    matchLabels: # these labels should match with pod
       app: cart
       tier: app
       project: roboshop
-  template:
+  template: # this is the pod definition
     metadata:
       labels:
         app: cart
@@ -22,12 +22,11 @@ spec:
         project: roboshop
     spec:
       containers:
-        - name: cart
-          image: rajakuma/cart:1.0.0
-          envFrom:
-          - configMapRef:
-              name: cart
-
+      - name: cart
+        image: rajakuma/cart:1.0.0
+        envFrom:
+        - configMapRef:
+            name: cart
 ---
 apiVersion: v1
 kind: Service
@@ -40,11 +39,10 @@ spec:
     tier: app
     project: roboshop
   ports:
-    - name: cart
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
-
+  - name: mongodb-port
+    protocol: TCP
+    port: 8080 # this port belongs to service
+    targetPort: 8080 # this port belongs to container
 ---
 apiVersion: v1
 kind: ConfigMap
