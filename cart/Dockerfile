@@ -6,5 +6,6 @@ RUN chown -R cart:cart /opt/server
 USER cart
 COPY package.json .
 COPY server.js .
+RUN mkdir -p /home/cart/.npm && chown -R cart:cart /home/cart
 RUN npm install
 CMD ["node", "server.js"]
