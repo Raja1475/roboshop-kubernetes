@@ -35,7 +35,6 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    labels:
       app: user
       tier: app
       project: roboshop
